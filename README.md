@@ -67,6 +67,8 @@ The supplied [PowerShell example](tests/fixtures/elastic-input.yaml) converts to
 | `rule_converter/sigma.py` | Vendor-neutral selection/condition rendering |
 | `rule_converter/diagnostics.py` | Stable diagnostic collection and deduplication |
 
+The [parser README](rule_converter/vendors/README.md) and [KQL implementation guide](rule_converter/vendors/KQL_DESIGN.md) explain the grammar, tokenizer, expression tree, error propagation, and extension workflow.
+
 A future vendor implements the adapter contract and emits the shared model. Adding vendor selection to the CLI is a separate extension; the current CLI always uses Elastic.
 
 ```sh

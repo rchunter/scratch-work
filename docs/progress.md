@@ -156,3 +156,12 @@ in favor of human-reviewed test ownership. Feature test commands remain pending.
 - Demo outputs/logs: /tmp/converter-demo-complete.yaml, /tmp/converter-demo-complete.jsonl, /tmp/converter-demo-draft.yaml, /tmp/converter-demo-draft.jsonl. These are demonstration artifacts, not additional tests or fixtures.
 - Updated README installation/usage/limitations and implementation reading route. No remote push.
 - Final CLI/documentation milestone message: `feat: add file-only converter CLI`; includes the green test report and usage guide. Commit identity is available in Git history.
+
+## KQL parser documentation — 2026-10-08
+
+- Added rule_converter/vendors/README.md as the parser entry guide and KQL_DESIGN.md as the detailed design/implementation walkthrough.
+- Documented the exact grammar and field policy, positioned tokenization, recursive-descent methods, shared model/rendering boundary, worked examples, diagnostics, test coverage, extension process, and current resource limits.
+- Linked the guides from the main README, feature design, and parser module docstring. No parsing behavior, test, fixture, or execution configuration changed.
+- Verified runnable README/example expressions, the full rendered walkthrough, the documented error at character 25, and local Markdown link targets. Compared parser AST excluding its module docstring with HEAD: executable AST unchanged.
+- `git diff --check` passed. The full behavior suite was not repeated for this documentation-only change; the last implementation run passed all 59 methods.
+- Documentation milestone: `docs: explain KQL parser design and implementation`. User's untracked test_rowen.yml remains untouched.

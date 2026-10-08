@@ -62,6 +62,8 @@ No dynamic plugin discovery, runtime imports, or vendor autodetection is needed 
 
 ## Query conversion
 
+See the [parser README](../rule_converter/vendors/README.md) and [KQL design and implementation guide](../rule_converter/vendors/KQL_DESIGN.md) for the current implementation walkthrough and its practical limits.
+
 Retain Boolean AND/OR/NOT and parentheses from v2, and add the specific field-scoped wildcard conjunction needed by the example:
 
 ```text

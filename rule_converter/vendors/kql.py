@@ -1,4 +1,8 @@
-"""Parse the supported Elastic KQL subset into vendor-neutral expressions."""
+"""Parse the supported Elastic KQL subset into vendor-neutral expressions.
+
+See README.md and KQL_DESIGN.md alongside this module for grammar, data flow,
+error handling, and the implementation reading route.
+"""
 from dataclasses import dataclass
 import re
 
