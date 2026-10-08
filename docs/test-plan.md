@@ -26,12 +26,13 @@ valuable. Avoid tests that only mirror private implementation details.
 - Test through public contracts; assert meaningful outputs and side effects.
 - Fix time/randomness and isolate state. Mock external boundaries only; do not
   mock the behavior being verified. Avoid arbitrary sleeps and network reliance.
-- Confirm setup and discovery work. Record expected assertion failures before
+- Confirm setup and discovery work. Record expected missing-behavior failures before
   implementation; an environment failure does not demonstrate red TDD.
 - Make each criterion independently diagnosable. Use hidden reviewer-owned
   cases or mutation checks for important rules when time permits.
-- The test author handles additions/corrections through independent review,
-  including snapshot changes. The implementer reports requests with evidence.
+- The test author handles additions/corrections through human review, including
+  snapshot changes. The implementer proposes changes with evidence and may
+  apply them only after explicit human approval, in a separate commit.
 
 ## Commands and environment
 
@@ -43,17 +44,17 @@ Fill these in before implementation. No application suite exists yet.
 | Targeted test | TBD | Current behavior slice |
 | Full suite | TBD | All feature and regression tests |
 | Lint / type / build | TBD or justified N/A | Applicable static/build checks |
-| Integrity | `python3 scripts/check_test_integrity.py <approved-full-SHA>` | Protected paths |
 
-## Approval and freeze
+## Human review and test ownership
 
 - Human-approved design version: pending
 - Test plan approval evidence: pending
 - Test author: pending
 - Reviewed red-test evidence and test count: pending
-- Approved test commit full SHA (also held by reviewer outside workspace): pending
-- Runner/fixture/config paths passed as extra protected paths: pending
+- Reviewed test commit: pending
+- Expected collected case IDs / count and justified skips: pending
 
-Freeze tests, fixtures, snapshots, runner configuration, lockfiles, manifests,
-CI, and this plan before implementation. Keep runtime test output in ignored
-directories outside `tests/`. Do not omit checks merely to get a green result.
+During implementation, do not change reviewed tests, fixtures, snapshots, or
+their execution settings without explicit human approval. Do not omit checks
+merely to get a green result. At intermediate milestones, log expected failures
+for later slices by case ID; at final acceptance, all approved cases must pass.

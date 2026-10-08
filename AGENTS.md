@@ -20,15 +20,14 @@ apply to this repository. Keep additional directory instructions short.
   the feature in that phase. Do not automatically spawn other agents.
 - The feature implementer may read and run tests but must not edit, delete,
   skip, weaken, regenerate snapshots, or alter their discovery or execution.
-  This includes fixtures, harnesses, dependencies, runner configuration,
-  integrity checks, and CI configuration.
-- Before implementation, the human records the approved test commit SHA and
-  gives the implementation session that SHA as its trusted baseline.
-- Demonstrate each new behavior test fails for the intended missing behavior,
-  not a broken import, environment, or syntax error. Then implement the smallest
+  This includes fixtures, harnesses, and runner/CI configuration. Explain any
+  proposed test or execution change and obtain explicit human approval before
+  applying it. Record approved corrections separately from the production fix.
+- Demonstrate each new behavior test fails for the intended missing behavior.
+  Broken setup, discovery, dependencies, or syntax do not count as red TDD. Then implement the smallest
   coherent change, rerun targeted tests, and refactor while green.
 - If a test appears wrong, report the evidence and proposed correction to the
-  human/test author. Do not correct it as the implementer.
+  human/test author. Apply a correction only after explicit human approval.
 - Never hardcode test inputs, detect test execution to change behavior, mock
   the feature itself, suppress errors, or report unexecuted checks as passing.
 
@@ -39,14 +38,17 @@ apply to this repository. Keep additional directory instructions short.
 - Follow the existing stack and conventions. Add abstractions or dependencies
   only when justified by the approved design.
 - Comments explain decisions and constraints. Avoid narrating obvious code.
-- Keep the design's file map and human reading guide accurate.
+- Keep the design's file map and human reading guide accurate. Documentation
+  clarifications may proceed; changed scope or behavior needs human review.
 
 ## Verification and progress
 
-- Run targeted tests after every meaningful behavior change; run the full suite
-  and configured lint/type/build checks before green milestones and handoff.
-- Run the test integrity check against the human-provided baseline before each
-  implementation commit. It supplements, not replaces, actual feature tests.
+- Run targeted tests after every meaningful behavior change. Run the full suite
+  and applicable lint/type/build checks before implementation milestones.
+- A slice is green when its tests and existing regressions pass. Tests for later
+  slices may remain red: log their expected failures by case ID and allow no new
+  failures. Never skip them to claim success. Final acceptance requires the full
+  suite and applicable checks to pass, with no unexplained skips or missing tests.
 - Commit small coherent milestones: approved design, reviewed failing tests,
   each passing behavior slice, refactor, and final review fixes. A deliberate
   red-test commit must be named `test: ... (red)` and record its expected failure.

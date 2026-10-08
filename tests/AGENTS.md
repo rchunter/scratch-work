@@ -1,11 +1,14 @@
 # Test ownership
 
 Read the root working agreement. The feature implementer may inspect and run
-these files but may not modify them, fixtures, snapshots, or test configuration.
+these files. Changes to tests, fixtures, snapshots, or test configuration need
+explicit human approval before the implementer applies them.
 
-Only a human or an explicitly assigned test author may change tests. That role
-must derive cases from the human-approved design/test plan, show intended red
-failures, and submit changes for human review before a new baseline is frozen.
-An implementer must report suspected test defects instead of fixing them.
+The human or an explicitly assigned test author writes tests from the approved
+design/test plan before implementation and submits them for human review.
+An implementer must explain suspected defects and proposed corrections before
+changing tests. Approved corrections belong in a separate commit from the
+production fix. Never weaken assertions, add skips, or alter discovery simply
+to make broken feature code pass.
 
-These instructions are behavioral rules, not filesystem access controls.
+These instructions are collaboration guidelines.

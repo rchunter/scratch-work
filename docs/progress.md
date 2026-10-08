@@ -2,7 +2,7 @@
 
 ## Current state
 
-Workspace workflow prepared. Feature, stack, design approval, and test baseline
+Workspace workflow prepared. Feature, stack, design approval, and reviewed tests
 are pending. No application tests have been authored or run.
 
 ## Decisions and human feedback
@@ -10,6 +10,7 @@ are pending. No application tests have been authored or run.
 | Date | Document/version | Human decision or feedback | Resolution |
 | --- | --- | --- | --- |
 | Pending | Pending | Pending | Pending |
+| 2026-10-08 | Workflow simplification | Human chose guidelines instead of enforced test isolation | Removed integrity tooling; clarified reviewed test changes and slice-green milestones |
 
 ## Verification log
 
@@ -21,12 +22,12 @@ red steps. Do not copy secrets or excessive logs.
 | Workflow setup | `git diff --check` | Passed | Setup commit |
 | Integrity guard | Temporary Git repository verification via Python subprocess | 10 cases passed: clean baseline, production-only edits, modified/staged/deleted/new/ignored tests, extra config, manifest, invalid SHA | Setup commit |
 
-Verification used disposable files outside this repository. It checks the guard,
-not a future application's behavior. Feature test commands remain pending.
+The guard verification above is historical; the tool has since been removed
+in favor of human-reviewed test ownership. Feature test commands remain pending.
 
 ## Handoff
 
 - Completed criteria: pending
-- Full suite/static/build/integrity results: pending
+- Full suite/static/build results: pending
 - Code reading route: see design.md (to be completed)
 - Remaining risks or deferred criteria: pending

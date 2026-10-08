@@ -1,102 +1,75 @@
 # Interview workflow
 
-This workspace is ready for a feature brief. Keep the process proportional to
-the interview: a short design, a concrete risk-based test matrix, and small
-behavior slices are enough to demonstrate judgment.
+Use a short design, a concrete risk-based test plan, and small behavior slices.
+Timebox planning to fit the interview and agree on a small demonstrable scope.
+Test ownership is a working agreement supported by human review and Git diffs.
 
 ## 1. Design and human feedback
 
-Use this prompt:
-
 > Read AGENTS.md. The feature brief is: [brief]. Inspect the existing project
-> and fill docs/design.md and docs/test-plan.md. Include concrete acceptance
-> criteria, tradeoffs, proposed files and interfaces, and a reading guide for
-> a human. Do not implement the feature yet. Present both docs for my review.
+> and fill docs/design.md and docs/test-plan.md. Include acceptance criteria,
+> tradeoffs, proposed files and interfaces, and a human code reading guide.
+> Do not implement the feature yet. Present both docs for my review.
 
-Review behavior, edge cases, architecture, and test coverage. Give feedback;
-the agent revises the docs. Explicitly approve the resulting versions, then
-commit them as `docs: approve feature design and test plan`. Approval is an
-actual human decision; a template or an agent-written approval is insufficient.
+Review the behavior, approach, edge cases, and coverage. The agent incorporates
+feedback; the human explicitly approves the resulting design and test plan.
+Commit as `docs: approve feature design and test plan`. An agent must never
+write its own approval. Changing scope or behavior requires renewed review.
 
-## 2. Write tests before code
+## 2. Write and review tests before code
 
-Use a separate test-author session, or have the human write the tests:
+The human or an explicitly assigned test author writes the tests. This can be
+a separate session or a distinct test-author phase of the same session.
 
 > Act as the test author. Use the approved design and test plan. Write meaningful
-> tests under tests/ through the agreed public contract. Set up the runner and
-> commands, but do not implement the feature. Show each behavior test failing
-> for its intended missing behavior. Submit tests and configuration for review.
+> tests through the agreed public contract. Set up the runner and commands, but
+> do not implement the feature. Show intended missing-behavior failures and
+> submit tests and configuration for human review.
 
-A minimal interface stub may be needed to obtain assertion failures instead
-of import errors. Keep it free of implementation. Review test discovery, expected
-results, fixtures, and all configuration. Commit as `test: cover approved
-behavior (red)` and record the expected failures in docs/progress.md.
+Review test discovery, concrete expected results, fixtures, and configuration.
+Setup, syntax, or dependency failures do not establish red TDD. Use a minimal
+interface stub only if needed by the chosen stack. Record expected failures by
+case ID and commit as `test: cover approved behavior (red)`.
 
-The human obtains `git rev-parse HEAD`, records the full SHA outside the
-implementation workspace, and supplies it to the implementer. Register extra
-test/harness/config paths with `--protect` if the default integrity paths do
-not cover the chosen stack. Lock dependency versions during this phase.
+## 3. Implement in small TDD slices
 
-## 3. Implement one behavior slice at a time
+> Act as the feature implementer. Read AGENTS.md and the approved docs. Read and
+> run the reviewed tests; do not weaken or change tests or execution settings
+> without explicit human approval. Implement one acceptance criterion at a time:
+> demonstrate red, implement, demonstrate green, then refactor. Test frequently,
+> commit coherent milestones, and log real evidence in docs/progress.md. If a
+> test seems wrong, explain the evidence and proposed change for human review.
 
-Use this prompt in the implementation session:
+Run targeted tests after each meaningful change and the full suite and applicable
+static/build checks at each implementation milestone. A slice is green when
+its tests and existing regressions pass. Tests for later slices may remain red:
+record those expected failures by case ID, and allow no new failures. Never skip
+them to claim success. Final acceptance requires all approved cases to pass.
 
-> Act as the feature implementer. The human-approved design and test plan are
-> in docs/. Approved test baseline: [full SHA]. Extra protected paths: [paths].
-> Read AGENTS.md. Tests and their execution configuration are read-only for your
-> role. Implement one acceptance criterion at a time: demonstrate red, implement,
-> demonstrate green, then refactor. Run targeted tests after each meaningful
-> change, and full/static checks and integrity before each green milestone.
-> Commit coherent slices and log real evidence in docs/progress.md. If tests
-> appear wrong, report the issue; do not change them or the baseline.
+Commit a passing behavior slice or useful refactor, typically every 10–20 minutes
+when there is a coherent result. Inspect `git diff` and `git diff --cached` and
+stage specific files. Use messages such as `feat: validate request input`.
+Record actual checks and remaining red cases; label intentional red-test commits
+clearly. Do not push unless requested.
 
-Run integrity with the exact SHA supplied by the human:
+Keep the design's file map and reading guide accurate as paths become concrete.
+Documentation clarifications do not need another approval gate; changes to
+observable behavior or scope do.
 
-```sh
-python3 scripts/check_test_integrity.py <approved-full-SHA>
-# Include additional paths, for example:
-python3 scripts/check_test_integrity.py <approved-full-SHA> --protect test-support --protect runner.config.json
-```
+## 4. Review and demo
 
-Commit after a passing behavior slice or useful green refactor, typically every
-10–20 minutes when there is a coherent result. Avoid timer-driven incomplete
-commits. Inspect `git diff` and `git diff --cached`; stage specific paths.
-Use messages such as `feat: validate request input` or `refactor: isolate IO`.
-Red commits are deliberate test-author milestones, not unfinished feature slices.
+Review the final diff, including any test, fixture, snapshot, or runner changes.
+The implementer must explain proposed test changes before applying them and get
+human approval. If approved, record the reason and make the test change a
+separate commit from the production fix. Tests must never be weakened merely
+to make a broken implementation pass.
 
-## 4. Independent review and demo
+Run the full suite and applicable lint/type/build checks. Verify that the expected
+tests were collected and there are no unexplained skips. Demonstrate a real
+happy path and one failure path, then walk through the design's code reading
+guide and commit history. Report completed criteria, actual check results, and
+remaining limitations. Passing tests alone do not establish comprehensive coverage.
 
-Have the human or independent reviewer run the approved suite against the final
-code, verify integrity using the original SHA, and inspect configuration and
-the implementation for test-specific shortcuts. Hidden tests should remain
-outside the implementer's workspace. Demonstrate a real happy path and one
-failure path, then walk through the design's reading guide and commit history.
-
-Handoff evidence: criteria satisfied, commands and outcomes, code reading route,
-known limitations, and remaining work. Never claim comprehensive coverage just
-because all existing tests pass.
-
-## What is enforced, and what is not
-
-`AGENTS.md` defines responsibilities; it does not restrict filesystem writes.
-Separate sessions or agents with the same filesystem permissions also do not
-provide isolation. The local integrity script detects protected changes when
-run faithfully against the original approved commit; it cannot defend against
-an implementer rewriting the script or choosing another baseline.
-
-For a technically enforced boundary, a human configures a container/sandbox or
-separate account with only production paths writable. Mount approved tests,
-fixtures, runner/config, and dependency manifests read-only; keep writable
-cache/output directories outside tests/. Do not provide the implementation
-session elevated access or permission to alter mounts. Plain chmod under the
-same file owner is insufficient because that owner can restore write access.
-
-Also run verification in reviewer-controlled CI or an external harness using
-the original baseline and guard obtained from a trusted checkout. Keep the
-baseline, harness, and hidden tests outside the agent's write authority. Require
-that independent check before accepting changes; repository-local CI editable
-by the implementer is insufficient on its own.
-
-This setup currently provides instructions and a local detection tool. No
-read-only implementation environment, hosted CI, or application test runner has
-been provisioned because the feature, stack, and hosting are not yet known.
+If time runs short, agree with the human on reduced scope and update the design
+and test plan. Preserve final verification rather than declaring unfinished
+behavior complete.

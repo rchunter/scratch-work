@@ -2,6 +2,11 @@
 
 Reviewed: 2026-10-08, repository setup commit `3f9639c`.
 
+Historical review: the human subsequently chose guideline-based test ownership.
+The integrity tool and enforcement workflow were removed. Findings below describe
+the earlier setup, not current requirements. TDD milestone semantics and design
+updates were clarified in the simplified workflow.
+
 Verdict: useful collaboration scaffolding, but it does not yet meet the goal
 that an implementation agent cannot manipulate tests. The documented isolation
 limits are candid. The local checker also has false passes beyond those limits.
