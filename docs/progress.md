@@ -116,3 +116,12 @@ in favor of human-reviewed test ownership. Feature test commands remain pending.
 - Human: “Commit the test structure and start implmentation.” This authorizes the reviewed tests/configuration/contracts and the feature-implementer phase.
 - Re-ran the unchanged full suite before production edits: 59 methods, 3 fixture checks passing, 56 expected-red methods (10 failures and 109 errors including subtests), zero skips. All behavior failures remain at the deliberately unimplemented public interfaces; baseline log: /tmp/converter-baseline-red.log.
 - Commit the reviewed test structure, source fixtures/licenses, dependency pin, data contracts/stubs, and the previously requested Elastic reference submodule as the deliberate red milestone. No tests/fixtures/execution configuration will be changed during implementation without further human approval.
+
+## Slice 1 — shared Sigma rendering (AC-09 / T-27)
+
+- Reviewed-red-test milestone: `804e858` (`test: cover approved behavior (red)`).
+- Implemented vendor-neutral exact/contains/contains-all selections, Boolean conditions, and incomplete-draft rendering. No Elastic parsing or test changes.
+- `.venv/bin/python -m unittest tests.test_sigma -v`: all 5 renderer methods pass after their recorded NotImplementedError red baseline.
+- Full suite: 59 methods; 8 pass, 51 expected-red methods remain (10 failure reports, 104 errors including subtests). Remaining cases are T-01–T-26/T-28 and R-01–R-04 at converter/CLI stubs; T-27 is green. Compared failing method IDs with baseline: zero new failures, zero skips.
+- `.venv/bin/python -m compileall -q rule_converter` and `git diff --check`: passed.
+- Full log: /tmp/converter-renderer-slice.log. Milestone commit follows this entry.
