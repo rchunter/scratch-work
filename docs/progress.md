@@ -134,3 +134,12 @@ in favor of human-reviewed test ownership. Feature test commands remain pending.
 - Full suite: 59 methods, 35 passing, 24 expected-red methods (16 failure reports and 15 errors including subtests). No newly failing method IDs compared with slice 1; zero skips.
 - Remaining red cases: fixture metadata T-01; source metadata T-14–T-17; threat mapping T-19/20/23/26/28; real-source R-01–R-04; CLI T-11/12/25. Their failure details reflect missing logsource/tag enrichment or the unchanged CLI stub. Full log: /tmp/converter-query-slice.log.
 - Syntax compilation and diff checks passed. Test files, fixtures, and execution settings remain unchanged from `804e858`.
+
+## Slice 3 — metadata, source hints, and ATT&CK (AC-03/07/08)
+
+- Query milestone: `796d4db` (`feat: translate supported Elastic KQL expressions`).
+- Added OS/index hints, declared process-creation inference, ATT&CK tactic/technique conversion, structured precedence, nested-field diagnostics, stable deduplication, and invalid-sibling recovery. Helpers are isolated in vendors/elastic_metadata.py; no new dependencies.
+- `.venv/bin/python -m unittest tests.test_converter tests.test_linux_references -v`: all 49 methods passed, including the complete human fixture and R-01–R-04 best-effort drafts.
+- Parser inspection tightened contains literals to reject single quotes as well as double quotes, matching the approved grammar. Re-ran T-17 groups and T-08 unsupported syntax: both passed.
+- Full suite: 59 methods; 54 pass; only 5 CLI methods remain expected red (T-11/12/25, 10 assertion reports including subtests), no errors or skips. Full log: /tmp/converter-metadata-slice.log.
+- Syntax compilation and diff checks passed. Tests, fixtures, and execution settings unchanged from `804e858`.

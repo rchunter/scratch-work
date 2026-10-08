@@ -162,6 +162,7 @@ Omit and log authors, dates, risk_score, and other unmapped vendor metadata. Inv
 | `rule_converter/diagnostics.py` | Per-conversion diagnostic collection, deduplication, and stable ordering |
 | `rule_converter/models.py` | Diagnostic, ConversionResult, Translation, VendorAdapter Protocol, shared expression dataclasses |
 | `rule_converter/vendors/elastic.py` | ElasticAdapter: field/metadata/logsource/ATT&CK mapping and diagnostics |
+| `rule_converter/vendors/elastic_metadata.py` | Elastic logsource/ATT&CK helpers and nested metadata diagnostics |
 | `rule_converter/vendors/kql.py` | Elastic KQL tokenizer/parser and source-position errors |
 | `rule_converter/sigma.py` | Vendor-neutral render_sigma: selection/condition emission and draft assembly |
 | `rule_converter/__main__.py` | File-only CLI, safe loading, YAML stdout, JSONL stderr, fatal errors |

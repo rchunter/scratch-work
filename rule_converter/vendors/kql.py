@@ -9,7 +9,7 @@ EXACT_FIELDS = frozenset({
     'process.parent.executable', 'host.os.type', 'event.category',
 })
 FIELD = re.compile(r'[A-Za-z_][A-Za-z0-9_.]*')
-CONTAINS = re.compile(r'\*([^\s():"\\*?]+)\*')
+CONTAINS = re.compile(r"""\*([^\s():"'\\*?]+)\*""")
 
 
 class QueryError(ValueError):

@@ -4,6 +4,7 @@ from uuid import UUID
 from ..diagnostics import Diagnostics
 from ..models import Translation
 from .kql import QueryError, parse_query
+from .elastic_metadata import attack_tags, logsource, string_items
 
 
 class ElasticAdapter:
@@ -13,9 +14,14 @@ class ElasticAdapter:
         diagnostics = Diagnostics()
         metadata = self._metadata(source, diagnostics)
         detection = self._detection(source, diagnostics)
-        metadata['logsource'] = {'definition': 'Elastic rule using ECS fields.'}
+        tags = string_items(source, 'tags', diagnostics)
+        metadata['logsource'] = logsource(source, tags, detection, diagnostics)
+        mapped_tags = attack_tags(source, tags, diagnostics)
+        if mapped_tags:
+            metadata['tags'] = mapped_tags
         diagnostics.unhandled(source, {'name', 'description', 'rule_id', 'severity', 'references',
-                                       'type', 'language', 'query', 'filters', 'exceptions_list', 'alert_suppression'})
+                                       'type', 'language', 'query', 'filters', 'exceptions_list', 'alert_suppression',
+                                       'index', 'tags', 'threat'})
         return Translation(metadata, detection, detection is not None, diagnostics.as_list())
 
     @staticmethod
