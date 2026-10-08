@@ -1,6 +1,6 @@
 # Detection Rule Converter — test plan
 
-Status: APPROVED v4 baseline, 2026-10-08. Human approved the design and requested test generation from repository examples. Authored tests and source-corpus additions are submitted for test review before implementation.
+Status: APPROVED v4 baseline, 2026-10-08. Human approved the design and requested test generation from repository examples. Human authorized committing the authored tests and starting implementation on 2026-10-08.
 
 ## Coverage matrix
 
@@ -50,7 +50,7 @@ Temporary files isolate CLI IO; use the active interpreter for subprocess tests.
 
 ## Proposed commands
 
-These are future commands; feature checks have not run.
+The commands below have been used for test-author verification where recorded in progress.md. The feature suite is deliberately red against interface stubs.
 
 | Check | Command | Scope |
 | --- | --- | --- |
@@ -71,5 +71,22 @@ Concurrency, authorization, accessibility, load, and network recovery do not app
 
 - Design/test-plan baseline: v4 / v4. Human approved proceeding to test generation on 2026-10-08.
 - Human direction: example alignment, best-effort conversion with logs, and modular vendor parsing. Fixtures remain unchanged.
-- Test author: this session, assigned by the human. Tests/configuration and red evidence require subsequent human review.
+- Test author: this session, assigned by the human. Human authorized the tests/configuration/contracts and implementation: “Commit the test structure and start implmentation.”
 - Final acceptance: all reviewed cases pass without unexplained skips, syntax/diff checks pass, complete example, incomplete draft, and fatal-input CLI demos recorded in docs/progress.md.
+
+## Repository-derived cases and authored test evidence — 2026-10-08
+
+The human requested Elastic repository examples and matching Sigma Linux rules. Four pinned comparisons are documented in [the corpus guide](../tests/fixtures/linux/README.md). No exact semantic equivalent was established among these pairs; the Sigma references are not golden converted outputs.
+
+| Case | AC | Real source / expected approved behavior |
+| --- | --- | --- |
+| R-01 | 03/04/08 | Base64 ES|QL: preserve metadata, log unsupported semantics, emit no detection; do not substitute Sigma's simpler base64 rule |
+| R-02 | 03/04/08 | Chattr EQL: preserve metadata and report incomplete detection; retain distinction between attribute removal/addition and exclusions |
+| R-03 | 03/04/08 | Insmod EQL: report incomplete detection; do not replace process logic with Sigma auditd syscall predicates |
+| R-04 | 03/04/08 | BPF KQL: query uses fields/syntax outside v4; report query limitation without dropping dataset/process constraints |
+
+The complete original Elastic [rule] objects were serialized from TOML to JSON for the approved file contract. No query normalization/simplification was performed. Fixture-integrity tests verify pinned bytes and query hashes offline. A separate explicitly synthetic Linux KQL case is a successful conversion test.
+
+59 test methods are authored across test_converter.py, test_sigma.py, test_cli.py, and test_linux_references.py. On Python 3.14.6 with PyYAML 6.0.3, 3 corpus-integrity methods pass; all 56 behavior methods are expected red. Parameterized variants produce 10 assertion-failure reports and 109 NotImplementedError reports. Zero skips; no import/dependency/syntax failures establish the red evidence. The 56 red methods fail because the public contracts are intentionally unimplemented. Exact per-method results and case IDs are in [test-results-red.json](test-results-red.json).
+
+Data-only models and NotImplementedError stubs enable valid discovery. They do not implement conversion. Test-author review of source comparisons and discovered failures is complete; human subsequently approved committing the test structure and starting implementation on 2026-10-08. This closes the test-review gate.

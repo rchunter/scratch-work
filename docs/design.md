@@ -167,6 +167,8 @@ Omit and log authors, dates, risk_score, and other unmapped vendor metadata. Inv
 | `requirements.txt` | PyYAML pinned to tested version by test author |
 | `tests/test_converter.py` | Facade cases, fixture-pair assertion, best-effort diagnostics |
 | `tests/test_sigma.py` | Direct shared-model rendering tests without Elastic source input |
+| `tests/test_linux_references.py`, `tests/fixtures/linux/` | Pinned upstream examples, comparison provenance, and expected incomplete drafts |
+| `tests/helpers.py`, `tests/README.md` | Test-owned builders/Boolean evaluator and test review guide |
 | `tests/test_cli.py`, `tests/__init__.py` | CLI integration tests and test discovery |
 | `tests/fixtures/elastic-input.yaml`, `tests/fixtures/sigma-expected.yaml` | Human-authored primary example; preserve contents |
 | `README.md` | Install/run instructions, incomplete-draft behavior and inference assumptions |
@@ -197,5 +199,9 @@ Slices: query conversion (AC-01/02); metadata/logsource/diagnostics (AC-03/04/07
 - Approved version: v4.
 - Human direction: align with the example, translate incomplete inputs best-effort with logs, and keep vendor parsing modular.
 - Human approval evidence (2026-10-08): “The design looks good. Lets start by generating test cases.”
-- Test author: this Codex session, explicitly assigned by the same request. Production implementation remains outside this phase.
+- Test author: this Codex session, explicitly assigned by the same request. The human subsequently authorized implementation on 2026-10-08: “Commit the test structure and start implmentation.”
 - Main assumptions to review: JSONL diagnostics on stderr; metadata-only drafts for incomplete detection; exit 0 for produced drafts; title fallback; small adapter interface; prior fixture/inference conventions retained.
+
+## Test-author interface clarification — 2026-10-08
+
+Data-only public contracts are now declared in models.py for red-test discovery: Match(field, operator, values) uses a tuple of strings; And/Or use left/right operands; Not uses operand. Translation has metadata, detection, detection_complete, and diagnostics. render_sigma(Translation) returns the output mapping. These clarify the approved interface without adding conversion behavior. convert_rule, render_sigma, and main remain NotImplementedError stubs.

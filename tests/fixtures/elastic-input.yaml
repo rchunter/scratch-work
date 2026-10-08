@@ -1,0 +1,25 @@
+name: Suspicious PowerShell Download Cradle
+rule_id: 3b6ab547-1503-4a73-8a67-1d2f2b970b32
+type: query
+description: Detects PowerShell commands commonly used to download and execute payloads
+risk_score: 73
+severity: high
+query: >
+  process.command_line:(*powershell* AND *IEX* AND *Net.WebClient*)
+index:
+  - winlogbeat-*
+  - logs-endpoint.events.*
+tags:
+  - Execution
+  - T1059.001
+threat:
+  - framework: MITRE ATT&CK
+    tactic:
+      id: TA0002
+      name: Execution
+    technique:
+      - id: T1059
+        name: Command and Scripting Interpreter
+        subtechnique:
+          - id: T1059.001
+            name: PowerShell

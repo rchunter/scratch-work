@@ -1,0 +1,428 @@
+{
+  "phase": "test author; implementation not started",
+  "date": "2026-10-08",
+  "command": ".venv/bin/python -m unittest discover -s tests -p 'test_*.py' -v",
+  "exit_code": 1,
+  "tests_run": 59,
+  "passing_methods": 3,
+  "expected_red_methods": 56,
+  "assertion_failure_reports": 10,
+  "error_reports": 109,
+  "skips": 0,
+  "unexpected_failures": 0,
+  "tests": [
+    {
+      "test": "test_cli.CliTests.test_T11_yaml_and_json_fixture",
+      "case": "T11",
+      "result": "expected-red",
+      "failure_or_error_reports": 3,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_cli.CliTests.test_T12_invalid_documents",
+      "case": "T12",
+      "result": "expected-red",
+      "failure_or_error_reports": 4,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_cli.CliTests.test_T12_missing_file",
+      "case": "T12",
+      "result": "expected-red",
+      "failure_or_error_reports": 1,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_cli.CliTests.test_T12_yaml_loader_rejects_python_object_tags",
+      "case": "T12",
+      "result": "expected-red",
+      "failure_or_error_reports": 1,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_cli.CliTests.test_T25_incomplete_detection_still_outputs_metadata",
+      "case": "T25",
+      "result": "expected-red",
+      "failure_or_error_reports": 1,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_converter.ConverterTests.test_T01_exact_field_preserved",
+      "case": "T01",
+      "result": "expected-red",
+      "failure_or_error_reports": 6,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_converter.ConverterTests.test_T01_human_fixture_pair",
+      "case": "T01",
+      "result": "expected-red",
+      "failure_or_error_reports": 1,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_converter.ConverterTests.test_T02_boolean_precedence",
+      "case": "T02",
+      "result": "expected-red",
+      "failure_or_error_reports": 1,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_converter.ConverterTests.test_T03_grouping_negation_and_repeated_fields",
+      "case": "T03",
+      "result": "expected-red",
+      "failure_or_error_reports": 1,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_converter.ConverterTests.test_T04_lowercase_and_double_negation",
+      "case": "T04",
+      "result": "expected-red",
+      "failure_or_error_reports": 1,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_converter.ConverterTests.test_T04_quoted_escapes",
+      "case": "T04",
+      "result": "expected-red",
+      "failure_or_error_reports": 1,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_converter.ConverterTests.test_T05_metadata",
+      "case": "T05",
+      "result": "expected-red",
+      "failure_or_error_reports": 1,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_converter.ConverterTests.test_T06_absent_optional_values_quiet",
+      "case": "T06",
+      "result": "expected-red",
+      "failure_or_error_reports": 1,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_converter.ConverterTests.test_T06_invalid_identifier_diagnosed",
+      "case": "T06",
+      "result": "expected-red",
+      "failure_or_error_reports": 1,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_converter.ConverterTests.test_T07_empty_optional_semantic_settings",
+      "case": "T07",
+      "result": "expected-red",
+      "failure_or_error_reports": 1,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_converter.ConverterTests.test_T07_library_returns_diagnostics_without_writing_streams",
+      "case": "T07",
+      "result": "expected-red",
+      "failure_or_error_reports": 1,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_converter.ConverterTests.test_T07_missing_type_and_language_defaults",
+      "case": "T07",
+      "result": "expected-red",
+      "failure_or_error_reports": 1,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_converter.ConverterTests.test_T07_unsupported_settings_preserve_metadata",
+      "case": "T07",
+      "result": "expected-red",
+      "failure_or_error_reports": 6,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_converter.ConverterTests.test_T08_query_error_includes_position_without_echoing_query",
+      "case": "T08",
+      "result": "expected-red",
+      "failure_or_error_reports": 1,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_converter.ConverterTests.test_T08_unsupported_query_constructs",
+      "case": "T08",
+      "result": "expected-red",
+      "failure_or_error_reports": 14,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_converter.ConverterTests.test_T09_malformed_and_empty_queries",
+      "case": "T09",
+      "result": "expected-red",
+      "failure_or_error_reports": 7,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_converter.ConverterTests.test_T10_severities",
+      "case": "T10",
+      "result": "expected-red",
+      "failure_or_error_reports": 5,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_converter.ConverterTests.test_T10_title_boundaries",
+      "case": "T10",
+      "result": "expected-red",
+      "failure_or_error_reports": 3,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_converter.ConverterTests.test_T10_title_fallbacks",
+      "case": "T10",
+      "result": "expected-red",
+      "failure_or_error_reports": 4,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_converter.ConverterTests.test_T13_determinism_and_input_immutability",
+      "case": "T13",
+      "result": "expected-red",
+      "failure_or_error_reports": 1,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_converter.ConverterTests.test_T14_mixed_index_windows_hint",
+      "case": "T14",
+      "result": "expected-red",
+      "failure_or_error_reports": 1,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_converter.ConverterTests.test_T14_os_tags",
+      "case": "T14",
+      "result": "expected-red",
+      "failure_or_error_reports": 3,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_converter.ConverterTests.test_T15_conflicting_unknown_and_duplicate_tags",
+      "case": "T15",
+      "result": "expected-red",
+      "failure_or_error_reports": 3,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_converter.ConverterTests.test_T16_definition_fallback",
+      "case": "T16",
+      "result": "expected-red",
+      "failure_or_error_reports": 1,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_converter.ConverterTests.test_T16_process_category_heuristic",
+      "case": "T16",
+      "result": "expected-red",
+      "failure_or_error_reports": 1,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_converter.ConverterTests.test_T17_contains_group_generalizes",
+      "case": "T17",
+      "result": "expected-red",
+      "failure_or_error_reports": 3,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_converter.ConverterTests.test_T17_single_contains",
+      "case": "T17",
+      "result": "expected-red",
+      "failure_or_error_reports": 1,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_converter.ConverterTests.test_T17_supported_linux_example_is_explicitly_synthetic",
+      "case": "T17",
+      "result": "expected-red",
+      "failure_or_error_reports": 1,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_converter.ConverterTests.test_T18_contains_group_in_outer_boolean",
+      "case": "T18",
+      "result": "expected-red",
+      "failure_or_error_reports": 1,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_converter.ConverterTests.test_T19_invalid_subtechnique_falls_back_to_parent",
+      "case": "T19",
+      "result": "expected-red",
+      "failure_or_error_reports": 1,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_converter.ConverterTests.test_T19_structured_tags_deduplicated",
+      "case": "T19",
+      "result": "expected-red",
+      "failure_or_error_reports": 1,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_converter.ConverterTests.test_T20_flat_tags_fallback",
+      "case": "T20",
+      "result": "expected-red",
+      "failure_or_error_reports": 1,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_converter.ConverterTests.test_T20_no_mapped_tags",
+      "case": "T20",
+      "result": "expected-red",
+      "failure_or_error_reports": 1,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_converter.ConverterTests.test_T20_structured_tags_take_precedence",
+      "case": "T20",
+      "result": "expected-red",
+      "failure_or_error_reports": 1,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_converter.ConverterTests.test_T21_no_title_or_literal_platform_guess",
+      "case": "T21",
+      "result": "expected-red",
+      "failure_or_error_reports": 1,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_converter.ConverterTests.test_T22_incomplete_fields_accumulate_diagnostics",
+      "case": "T22",
+      "result": "expected-red",
+      "failure_or_error_reports": 1,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_converter.ConverterTests.test_T23_unknown_objects_and_valid_siblings",
+      "case": "T23",
+      "result": "expected-red",
+      "failure_or_error_reports": 1,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_converter.ConverterTests.test_T24_unsupported_predicate_never_dropped",
+      "case": "T24",
+      "result": "expected-red",
+      "failure_or_error_reports": 6,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_converter.ConverterTests.test_T26_represented_tags_not_lost_and_routing_diagnosed",
+      "case": "T26",
+      "result": "expected-red",
+      "failure_or_error_reports": 1,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_converter.ConverterTests.test_T28_malformed_threat_siblings",
+      "case": "T28",
+      "result": "expected-red",
+      "failure_or_error_reports": 1,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_converter.ConverterTests.test_T28_wrong_optional_container_types",
+      "case": "T28",
+      "result": "expected-red",
+      "failure_or_error_reports": 7,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_converter.ConverterTests.test_T28_wrong_query_type",
+      "case": "T28",
+      "result": "expected-red",
+      "failure_or_error_reports": 4,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_linux_references.LinuxReferenceTests.test_R01_base64_esql_keeps_metadata_reports_unsupported_semantics",
+      "case": "R01",
+      "result": "expected-red",
+      "failure_or_error_reports": 1,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_linux_references.LinuxReferenceTests.test_R02_chattr_eql_does_not_substitute_sigma_rule",
+      "case": "R02",
+      "result": "expected-red",
+      "failure_or_error_reports": 1,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_linux_references.LinuxReferenceTests.test_R03_insmod_eql_does_not_substitute_auditd_detection",
+      "case": "R03",
+      "result": "expected-red",
+      "failure_or_error_reports": 1,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_linux_references.LinuxReferenceTests.test_R04_bpf_kql_does_not_drop_source_constraints",
+      "case": "R04",
+      "result": "expected-red",
+      "failure_or_error_reports": 1,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_linux_references.ReferenceIntegrityTests.test_bpf_pair_has_same_indicator_but_different_constraints",
+      "case": "fixture-integrity",
+      "result": "passed",
+      "failure_or_error_reports": 0,
+      "reason": "Fixture provenance/license checks only"
+    },
+    {
+      "test": "test_linux_references.ReferenceIntegrityTests.test_licenses_retained",
+      "case": "fixture-integrity",
+      "result": "passed",
+      "failure_or_error_reports": 0,
+      "reason": "Fixture provenance/license checks only"
+    },
+    {
+      "test": "test_linux_references.ReferenceIntegrityTests.test_reference_bytes_and_query_hashes_match_manifest",
+      "case": "fixture-integrity",
+      "result": "passed",
+      "failure_or_error_reports": 0,
+      "reason": "Fixture provenance/license checks only"
+    },
+    {
+      "test": "test_sigma.SigmaRendererTests.test_T27_contains_all",
+      "case": "T27",
+      "result": "expected-red",
+      "failure_or_error_reports": 1,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_sigma.SigmaRendererTests.test_T27_contains_scalar",
+      "case": "T27",
+      "result": "expected-red",
+      "failure_or_error_reports": 1,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_sigma.SigmaRendererTests.test_T27_exact_match_from_shared_model",
+      "case": "T27",
+      "result": "expected-red",
+      "failure_or_error_reports": 1,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_sigma.SigmaRendererTests.test_T27_incomplete_shared_model",
+      "case": "T27",
+      "result": "expected-red",
+      "failure_or_error_reports": 1,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    },
+    {
+      "test": "test_sigma.SigmaRendererTests.test_T27_shared_boolean_tree",
+      "case": "T27",
+      "result": "expected-red",
+      "failure_or_error_reports": 1,
+      "reason": "Public feature contract deliberately raises NotImplementedError"
+    }
+  ]
+}

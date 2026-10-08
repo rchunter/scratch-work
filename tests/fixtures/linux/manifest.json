@@ -1,0 +1,87 @@
+{
+  "elastic_revision": "7e37a41b1e5008faddffef37c8ddd56a8a3398e7",
+  "sigma_revision": "8a4813404ea3074890e0cda9272d4d1a8b2941d6",
+  "normalization": "Extract complete [rule] TOML table and serialize to JSON. Query, type, language, and other rule values are unchanged. Repository [metadata] is not part of the flat runtime rule contract.",
+  "pairs": [
+    {
+      "case": "base64",
+      "elastic_path": "rules/linux/defense_evasion_base64_decoding_activity.toml",
+      "elastic_url": "https://github.com/elastic/detection-rules/blob/7e37a41b1e5008faddffef37c8ddd56a8a3398e7/rules/linux/defense_evasion_base64_decoding_activity.toml",
+      "elastic_source_sha256": "381921741a4f1f92f29c179238450054baf548bfd9ff656f6c19b593320e64e4",
+      "input": "elastic/base64.json",
+      "input_sha256": "3aba98ae0a4c4a19e15ffb7f3c8c5c8a6bb9fb43b8b1ee8455ceed100e897bf9",
+      "query_sha256": "0a903007b9abc635e0448f78e97531019bf6a4c15d60f413ce5d805403af4220",
+      "sigma_path": "rules/linux/process_creation/proc_creation_lnx_base64_decode.yml",
+      "sigma_url": "https://github.com/SigmaHQ/sigma/blob/8a4813404ea3074890e0cda9272d4d1a8b2941d6/rules/linux/process_creation/proc_creation_lnx_base64_decode.yml",
+      "reference": "sigma/proc_creation_lnx_base64_decode.yml",
+      "reference_sha256": "5f19210a426f49e15a3906295928895f4d5e81800f9eb5a2328ce973cfc50d48",
+      "relationship": "overlapping",
+      "difference": "Elastic covers several utilities and aggregates rare activity; Sigma checks /base64 plus -d only.",
+      "expected_detection_complete": false,
+      "required_diagnostic": {
+        "code": "unsupported_semantics",
+        "path": "type"
+      }
+    },
+    {
+      "case": "chattr",
+      "elastic_path": "rules/linux/defense_evasion_chattr_immutable_file.toml",
+      "elastic_url": "https://github.com/elastic/detection-rules/blob/7e37a41b1e5008faddffef37c8ddd56a8a3398e7/rules/linux/defense_evasion_chattr_immutable_file.toml",
+      "elastic_source_sha256": "86def507bb58c6979e39187b7accc014f66c543c195f8a2d4869964ab424a8f8",
+      "input": "elastic/chattr.json",
+      "input_sha256": "26a51d06d62428ad351770763faad54d2fc827480095cb079917f57ec28c0886",
+      "query_sha256": "1143e9b07dd9d11b763e4295cc98f8342ec361f6769d4373b62e6cceee01af15",
+      "sigma_path": "rules/linux/process_creation/proc_creation_lnx_chattr_immutable_removal.yml",
+      "sigma_url": "https://github.com/SigmaHQ/sigma/blob/8a4813404ea3074890e0cda9272d4d1a8b2941d6/rules/linux/process_creation/proc_creation_lnx_chattr_immutable_removal.yml",
+      "reference": "sigma/proc_creation_lnx_chattr_immutable_removal.yml",
+      "reference_sha256": "3fbd0d310cba0f7fbfb0d1ca241d20bb8c8f5f43799c45723830f9aa8fb320f4",
+      "relationship": "overlapping",
+      "difference": "Elastic covers both -i and +i patterns with parent exclusions; Sigma covers literal -i removal only.",
+      "expected_detection_complete": false,
+      "required_diagnostic": {
+        "code": "unsupported_semantics",
+        "path": "type"
+      }
+    },
+    {
+      "case": "insmod",
+      "elastic_path": "rules/linux/persistence_insmod_kernel_module_load.toml",
+      "elastic_url": "https://github.com/elastic/detection-rules/blob/7e37a41b1e5008faddffef37c8ddd56a8a3398e7/rules/linux/persistence_insmod_kernel_module_load.toml",
+      "elastic_source_sha256": "5fad85710f74e520106b9f58478831ffa5fd98e2a6736ac3fc56ae93e9718df3",
+      "input": "elastic/insmod.json",
+      "input_sha256": "1cd313dd67d02b7c73c4950077727fd4b38065aa29de096b812f8551af6667ea",
+      "query_sha256": "d015907c5b0f2d8d319a6e8ea7a3a8fc42edcbc8f48d97ac1c374aa3184099d7",
+      "sigma_path": "rules/linux/auditd/syscall/lnx_auditd_load_module_insmod.yml",
+      "sigma_url": "https://github.com/SigmaHQ/sigma/blob/8a4813404ea3074890e0cda9272d4d1a8b2941d6/rules/linux/auditd/syscall/lnx_auditd_load_module_insmod.yml",
+      "reference": "sigma/lnx_auditd_load_module_insmod.yml",
+      "reference_sha256": "ffc1793cbfc9059d5294e20c825c7d15ffe6ebfcb36625a34413041c8a90cbcd",
+      "relationship": "related",
+      "difference": "Elastic process events cover kmod/insmod/modprobe with exclusions; Sigma requires auditd SYSCALL, comm insmod, and /usr/bin/kmod.",
+      "expected_detection_complete": false,
+      "required_diagnostic": {
+        "code": "unsupported_semantics",
+        "path": "type"
+      }
+    },
+    {
+      "case": "bpf",
+      "elastic_path": "rules/linux/persistence_bpf_probe_write_user.toml",
+      "elastic_url": "https://github.com/elastic/detection-rules/blob/7e37a41b1e5008faddffef37c8ddd56a8a3398e7/rules/linux/persistence_bpf_probe_write_user.toml",
+      "elastic_source_sha256": "5618e5ba7fed215f9ebf76996cac324e2f4d4e7beb259fdaa1b02ec2145e1503",
+      "input": "elastic/bpf.json",
+      "input_sha256": "1ecd0d145fa673f2b753e51f2805ac050bce3ddc4b517cc6c0b2070ce45b6081",
+      "query_sha256": "e94f96cb018df203d07c8a429dc20c0ea2d11fde923b00f7a1dc9e8d879d5748",
+      "sigma_path": "rules/linux/builtin/lnx_potential_susp_ebpf_activity.yml",
+      "sigma_url": "https://github.com/SigmaHQ/sigma/blob/8a4813404ea3074890e0cda9272d4d1a8b2941d6/rules/linux/builtin/lnx_potential_susp_ebpf_activity.yml",
+      "reference": "sigma/lnx_potential_susp_ebpf_activity.yml",
+      "reference_sha256": "083167cd24127940dc716b5df60a43222bbbb2c789449b306a33f7ba8bea1b8e",
+      "relationship": "near_match",
+      "difference": "Both look for bpf_probe_write_user; Elastic additionally constrains Linux, system.syslog, kernel process, and message field. Sigma uses an unfielded keyword.",
+      "expected_detection_complete": false,
+      "required_diagnostic": {
+        "code": "unsupported_query",
+        "path": "query"
+      }
+    }
+  ]
+}

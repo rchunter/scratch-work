@@ -2,9 +2,10 @@
 
 ## Current state
 
-Detection Rule Converter design and test plan revised as v4 on 2026-10-08.
-Proposed Python CLI, restricted KQL conversion, and input-derived logsource await human
-approval in the historical drafts below. The human has now approved v4 and assigned this session to author tests; production implementation has not started.
+Design v4 approved by the human on 2026-10-08; this session was assigned to author tests.
+59 test methods now exist: 3 fixture-integrity methods pass and 56 behavior methods
+are intentionally red against public-interface stubs. Human test review is pending.
+Production conversion, rendering, and CLI behavior are not implemented.
 
 ## Decisions and human feedback
 
@@ -28,9 +29,9 @@ in favor of human-reviewed test ownership. Feature test commands remain pending.
 
 ## Handoff
 
-- Completed criteria: pending
+- Completed criteria: test-author coverage drafted for AC-01–AC-09; no implementation criteria complete
 - Full suite/static/build results: pending
-- Code reading route: see design.md (to be completed)
+- Code reading route: see design.md and tests/README.md
 - Remaining risks or deferred criteria: pending
 
 ## Detection Rule Converter design phase — 2026-10-08
@@ -85,3 +86,33 @@ in favor of human-reviewed test ownership. Feature test commands remain pending.
 - Human: “The design looks good. Lets start by generating test cases.” Requested Elastic repository examples and matching Sigma Linux rules.
 - Recorded v4 approval and explicit test-author assignment to this session. Test review remains pending; no feature implementation authorized in this phase.
 - Repository examples will be pinned, compared semantically, and used within the approved subset. Related Sigma rules are reference comparisons, not automatically expected outputs.
+
+## Test-author results — 2026-10-08
+
+- Design milestone committed as `dcbdf4e` (`docs: approve feature design and test plan`), only the three design/progress documents. Previously staged submodule registration was left separate.
+- Explicitly assigned test-author work: tests, pinned PyYAML dependency, data-only public models, and NotImplementedError facade/renderer/CLI stubs. No feature implementation.
+- Found four related Linux pairs: base64, chattr, insmod, BPF. Documented actual semantic differences and pinned source commits; no equivalent pair claimed.
+- Preserved complete Elastic [rule] values in JSON fixtures and original Sigma reference bytes. Retained licenses and source/hash manifest. Human PowerShell fixtures were not modified.
+- Corpus scan at pinned Elastic commit counted 296 EQL, 50 new_terms/kuery, 17 query/kuery, 10 ES|QL, and 3 threshold/kuery Linux rules. This is a snapshot, not a claim about current upstream coverage or successful conversions.
+
+| Command | Actual result | Meaning |
+| --- | --- | --- |
+| `python3 --version` | Python 3.14.6 | Satisfies Python 3.11+ |
+| `python3 -m venv .venv` | Passed | Isolated test environment |
+| `.venv/bin/python -m pip install PyYAML==6.0.3` | Passed | Pinned dependency installed |
+| `.venv/bin/python -m pip check` | No broken requirements | Dependency setup valid |
+| `.venv/bin/python -m compileall -q rule_converter tests` | Passed | Contracts/tests compile |
+| `.venv/bin/python -m unittest tests.test_linux_references.ReferenceIntegrityTests -v` | 3 passed | Fixture hashes, indicator comparison, licenses only |
+| `.venv/bin/python -m unittest discover -s tests -p 'test_*.py' -v` | Exit 1; 59 methods; 3 pass, 56 expected red; 10 failure reports and 109 error reports; zero skips | All behavioral red reports trace to deliberate NotImplementedError stubs |
+| `git diff --check` | Passed | Documentation whitespace checks |
+
+- Red evidence by method/case: docs/test-results-red.json. Raw local run output: /tmp/detection-converter-red.log (not required for future runs).
+- Test-author inspection verified no setup/discovery/dependency/syntax failure is being counted as feature red. CLI assertions fail because the stub cannot yet provide the specified exit/output/diagnostic behavior.
+- A temporary evidence-summary script initially lacked the repository import path; corrected the audit script and successfully summarized the already completed suite. That audit setup error is not counted as test evidence.
+- Test/configuration human review and the reviewed-red-test commit milestone remain pending. No push performed.
+
+## Test approval and implementation start — 2026-10-08
+
+- Human: “Commit the test structure and start implmentation.” This authorizes the reviewed tests/configuration/contracts and the feature-implementer phase.
+- Re-ran the unchanged full suite before production edits: 59 methods, 3 fixture checks passing, 56 expected-red methods (10 failures and 109 errors including subtests), zero skips. All behavior failures remain at the deliberately unimplemented public interfaces; baseline log: /tmp/converter-baseline-red.log.
+- Commit the reviewed test structure, source fixtures/licenses, dependency pin, data contracts/stubs, and the previously requested Elastic reference submodule as the deliberate red milestone. No tests/fixtures/execution configuration will be changed during implementation without further human approval.
