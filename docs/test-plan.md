@@ -50,7 +50,7 @@ Temporary files isolate CLI IO; use the active interpreter for subprocess tests.
 
 ## Proposed commands
 
-The commands below have been used for test-author verification where recorded in progress.md. The feature suite is deliberately red against interface stubs.
+The commands below have been used for test-author verification where recorded in progress.md. The historical red baseline used interface stubs; the completed implementation now passes all 59 methods, as recorded below.
 
 | Check | Command | Scope |
 | --- | --- | --- |
@@ -90,3 +90,7 @@ The complete original Elastic [rule] objects were serialized from TOML to JSON f
 59 test methods are authored across test_converter.py, test_sigma.py, test_cli.py, and test_linux_references.py. On Python 3.14.6 with PyYAML 6.0.3, 3 corpus-integrity methods pass; all 56 behavior methods are expected red. Parameterized variants produce 10 assertion-failure reports and 109 NotImplementedError reports. Zero skips; no import/dependency/syntax failures establish the red evidence. The 56 red methods fail because the public contracts are intentionally unimplemented. Exact per-method results and case IDs are in [test-results-red.json](test-results-red.json).
 
 Data-only models and NotImplementedError stubs enable valid discovery. They do not implement conversion. Test-author review of source comparisons and discovered failures is complete; human subsequently approved committing the test structure and starting implementation on 2026-10-08. This closes the test-review gate.
+
+## Final implementation acceptance — 2026-10-08
+
+All 59 reviewed methods pass with zero failures/errors/skips. Syntax compilation, dependency validation, and diff checks pass. Complete-output, incomplete-draft, and fatal-input CLI demonstrations matched the contract. Tests/fixtures/helpers and requirements.txt are byte-unchanged from reviewed-red commit 804e858. See test-results-green.json and progress.md for evidence. No live backend equivalence is claimed.

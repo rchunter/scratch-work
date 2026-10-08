@@ -1,1 +1,1 @@
-"""Vendor adapters will live here after tests are reviewed."""
+"""Vendor-specific adapters and query-language parsers."""

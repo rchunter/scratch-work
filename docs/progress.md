@@ -2,10 +2,10 @@
 
 ## Current state
 
-Design v4 approved by the human on 2026-10-08; this session was assigned to author tests.
-59 test methods now exist: 3 fixture-integrity methods pass and 56 behavior methods
-are intentionally red against public-interface stubs. Human test review is pending.
-Production conversion, rendering, and CLI behavior are not implemented.
+Design v4 and the test structure were approved by the human. Implementation is complete:
+all 59 reviewed test methods pass, with no skips. The CLI accepts a single JSON/YAML
+file and emits Sigma output or an explicitly incomplete draft plus diagnostics.
+Tests, fixtures, and dependency/execution configuration are unchanged from `804e858`.
 
 ## Decisions and human feedback
 
@@ -29,10 +29,10 @@ in favor of human-reviewed test ownership. Feature test commands remain pending.
 
 ## Handoff
 
-- Completed criteria: test-author coverage drafted for AC-01–AC-09; no implementation criteria complete
-- Full suite/static/build results: pending
+- Completed criteria: AC-01–AC-09 implemented and verified by the 59 reviewed methods.
+- Full suite/static/build results: 59 passed; syntax compilation and dependency checks passed; no separate build/lint/type tools in the approved stack.
 - Code reading route: see design.md and tests/README.md
-- Remaining risks or deferred criteria: pending
+- Remaining risks: restricted KQL/field coverage; inferred logsource; no backend equivalence validation. EQL/ES|QL and broader source semantics remain deferred.
 
 ## Detection Rule Converter design phase — 2026-10-08
 
@@ -143,3 +143,16 @@ in favor of human-reviewed test ownership. Feature test commands remain pending.
 - Parser inspection tightened contains literals to reject single quotes as well as double quotes, matching the approved grammar. Re-ran T-17 groups and T-08 unsupported syntax: both passed.
 - Full suite: 59 methods; 54 pass; only 5 CLI methods remain expected red (T-11/12/25, 10 assertion reports including subtests), no errors or skips. Full log: /tmp/converter-metadata-slice.log.
 - Syntax compilation and diff checks passed. Tests, fixtures, and execution settings unchanged from `804e858`.
+
+## Slice 4 — file-only CLI and final verification (AC-05/06)
+
+- Metadata milestone: `c983e19` (`feat: translate Elastic metadata with best-effort diagnostics`).
+- Implemented safe UTF-8 JSON/YAML loading, one positional input, YAML stdout, deterministic JSONL stderr, complete/draft exit 0, and structured fatal-input exit 1. Both channels are serialized before document output.
+- `.venv/bin/python -m unittest tests.test_cli -v`: all 5 CLI methods passed after recorded red baseline.
+- `.venv/bin/python -m unittest discover -s tests -p 'test_*.py' -v`: all 59 methods passed; zero errors, failures, or skips. Log: /tmp/converter-final-suite.log; permanent per-method record: docs/test-results-green.json.
+- `.venv/bin/python -m compileall -q rule_converter`, `.venv/bin/python -m pip check`, and `git diff --check`: passed; no broken requirements. No separate build/lint/type tools were specified in the approved stack.
+- `git diff --name-only 804e858 -- tests requirements.txt`: empty, confirming no test, fixture, helper, or dependency-pin changes during implementation.
+- CLI demos via subprocess: supplied PowerShell fixture exited 0 and exactly matched expected parsed YAML (8 diagnostics); real BPF fixture exited 0 with status unsupported and no detection (30 diagnostics); missing file exited 1 with empty stdout and a structured input_error diagnostic.
+- Demo outputs/logs: /tmp/converter-demo-complete.yaml, /tmp/converter-demo-complete.jsonl, /tmp/converter-demo-draft.yaml, /tmp/converter-demo-draft.jsonl. These are demonstration artifacts, not additional tests or fixtures.
+- Updated README installation/usage/limitations and implementation reading route. No remote push.
+- Final CLI/documentation milestone message: `feat: add file-only converter CLI`; includes the green test report and usage guide. Commit identity is available in Git history.

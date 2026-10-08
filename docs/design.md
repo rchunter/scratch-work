@@ -154,7 +154,7 @@ Omit and log authors, dates, risk_score, and other unmapped vendor metadata. Inv
 | AC-08 | Invalid/unmapped fields and assumptions have path-specific diagnostics; valid siblings translate; missing optional fields are quiet |
 | AC-09 | Elastic interpretation is isolated behind the adapter; shared Sigma rendering accepts vendor-neutral expressions without importing Elastic |
 
-## Proposed files and reading route
+## Implementation files and reading route
 
 | Path | Responsibility |
 | --- | --- |
@@ -176,7 +176,7 @@ Omit and log authors, dates, risk_score, and other unmapped vendor metadata. Inv
 | `README.md` | Install/run instructions, incomplete-draft behavior and inference assumptions |
 | `docs/progress.md` | Reviews and actual validation evidence |
 
-Read the fixture pair, then `__main__.py:main`, the facade, `models.py`, `vendors/elastic.py:ElasticAdapter.translate`, `vendors/kql.py`, and `sigma.py:render_sigma`. The example loads without language, records its assumption, parses the command-line group into Match(CommandLine, contains_all, values), derives metadata/logsource, and renders the unchanged expected document plus separate diagnostics. Follow an unsupported-query case to see metadata retained without a detection section.
+Read the fixture pair, then `__main__.py:main`, the facade, `models.py`, `vendors/elastic.py:ElasticAdapter.translate`, `vendors/kql.py`, `vendors/elastic_metadata.py`, and `sigma.py:render_sigma`. The example loads without language, records its assumption, parses the command-line group into Match(CommandLine, contains_all, values), derives metadata/logsource, and renders the unchanged expected document plus separate diagnostics. Follow an unsupported-query case to see metadata retained without a detection section.
 
 To add a vendor, implement VendorAdapter and its parser, returning shared expressions/metadata/diagnostics; the Sigma writer remains unchanged for existing operators. Verify the renderer directly with shared-model test inputs, not a production fake adapter. No second vendor is implemented in this exercise.
 
@@ -206,4 +206,4 @@ Slices: query conversion (AC-01/02); metadata/logsource/diagnostics (AC-03/04/07
 
 ## Test-author interface clarification — 2026-10-08
 
-Data-only public contracts are now declared in models.py for red-test discovery: Match(field, operator, values) uses a tuple of strings; And/Or use left/right operands; Not uses operand. Translation has metadata, detection, detection_complete, and diagnostics. render_sigma(Translation) returns the output mapping. These clarify the approved interface without adding conversion behavior. convert_rule, render_sigma, and main remain NotImplementedError stubs.
+Data-only public contracts are now declared in models.py for red-test discovery: Match(field, operator, values) uses a tuple of strings; And/Or use left/right operands; Not uses operand. Translation has metadata, detection, detection_complete, and diagnostics. render_sigma(Translation) returns the output mapping. These clarify the approved interface without adding conversion behavior. At the reviewed red milestone, convert_rule, render_sigma, and main were NotImplementedError stubs. They are now implemented; all 59 reviewed methods pass. See progress.md for the unchanged-test verification and commit milestones.

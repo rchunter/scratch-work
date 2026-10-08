@@ -1,4 +1,4 @@
-"""Data-only public contracts for the reviewed test-author phase."""
+"""Shared expressions, adapter contract, and conversion results."""
 from __future__ import annotations
 
 from dataclasses import dataclass
