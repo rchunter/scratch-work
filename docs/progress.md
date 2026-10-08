@@ -125,3 +125,12 @@ in favor of human-reviewed test ownership. Feature test commands remain pending.
 - Full suite: 59 methods; 8 pass, 51 expected-red methods remain (10 failure reports, 104 errors including subtests). Remaining cases are T-01–T-26/T-28 and R-01–R-04 at converter/CLI stubs; T-27 is green. Compared failing method IDs with baseline: zero new failures, zero skips.
 - `.venv/bin/python -m compileall -q rule_converter` and `git diff --check`: passed.
 - Full log: /tmp/converter-renderer-slice.log. Milestone commit follows this entry.
+
+## Slice 2 — supported KQL and atomic failure (AC-01/02/04/07/08)
+
+- Shared-renderer milestone: `e73c792` (`feat: render vendor-neutral Sigma detections`).
+- Added recursive-descent KQL parsing, source-position errors without query-value disclosure, basic independent metadata conversion, per-conversion diagnostics, and the Elastic adapter/facade. Unsupported query parts or additional semantic settings omit detection atomically.
+- Targeted tests T-01 (exact), T-02/03/04, T-08/09, T-17 (groups), T-18, T-24: 10 methods passed after recorded red baseline.
+- Full suite: 59 methods, 35 passing, 24 expected-red methods (16 failure reports and 15 errors including subtests). No newly failing method IDs compared with slice 1; zero skips.
+- Remaining red cases: fixture metadata T-01; source metadata T-14–T-17; threat mapping T-19/20/23/26/28; real-source R-01–R-04; CLI T-11/12/25. Their failure details reflect missing logsource/tag enrichment or the unchanged CLI stub. Full log: /tmp/converter-query-slice.log.
+- Syntax compilation and diff checks passed. Test files, fixtures, and execution settings remain unchanged from `804e858`.

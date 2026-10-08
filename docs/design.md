@@ -159,6 +159,7 @@ Omit and log authors, dates, risk_score, and other unmapped vendor metadata. Inv
 | Path | Responsibility |
 | --- | --- |
 | `rule_converter/__init__.py` | Public convert_rule facade selecting Elastic and combining translation/rendering |
+| `rule_converter/diagnostics.py` | Per-conversion diagnostic collection, deduplication, and stable ordering |
 | `rule_converter/models.py` | Diagnostic, ConversionResult, Translation, VendorAdapter Protocol, shared expression dataclasses |
 | `rule_converter/vendors/elastic.py` | ElasticAdapter: field/metadata/logsource/ATT&CK mapping and diagnostics |
 | `rule_converter/vendors/kql.py` | Elastic KQL tokenizer/parser and source-position errors |
